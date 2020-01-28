@@ -1,0 +1,58 @@
+button{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+}
+
+.wide{
+    width: 108px;
+}
+
+.tall{
+    height: 104px;
+}
+.firstLine{
+    width: 240px;
+}
+
+.buttonBlock{
+    display: flex;
+    width: 240px;
+}
+
+.numberBlock{
+    flex: 0 0 170px;
+    margin-right: 4px;
+}
+
+.sideButton{    
+    flex: 1;
+    width: 60px;
+}
+
+div{
+    margin: 0;
+    padding: 0;
+}
+
+.displayOutput{
+    margin-left: 2px;
+    margin-bottom: 2px;
+    width: 223px;
+    height: 50px;
+    border: 1px solid gray;
+}
+
+#calculator{
+    display: flex;
+}
+
+.column1{
+    flex: 0 0 240px;
+}
+
+.column2{
+    width : 200px;
+    height: 300px;
+    border: 1px solid gray;
+}

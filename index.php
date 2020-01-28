@@ -18,7 +18,7 @@
   <meta name="description" content="poe ninja api implementation">
   <meta name="author" content="vsn4ke">
 
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
@@ -30,13 +30,13 @@
       <div class="displayOutput">
       
       </div>
-      <div class="buttonBlock">
-        <div class="buttonLine">
+      <div class="firstLine">
           <button type="button" name="C">C</button> 
           <button type="button" name="/">/</button>
           <button type="button" name="*">*</button>
           <button type="button" name="-">-</button>
-        </div>
+      </div>
+      <div class="buttonBlock">
         <div class="numberBlock">
           <div class="buttonLine">
             <button type="button" name="7">7</button>
