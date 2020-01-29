@@ -21,7 +21,7 @@ button{
     display: flex;
 }
 
-#calculator{
+.calculator{
     display: flex;
 }
 
@@ -51,19 +51,27 @@ button{
     width: 60px;
 }
 
-.displayOutput{
+.display{
     margin-left: 2px;
     margin-bottom: 2px;
     width: 223px;
     height: 50px;
 }
 
-.table, .column2, .displayOutput{
+.display p {
+    margin-right: 4px;
+    text-align: right;
+}
+
+.display p, td, button {
+    font-family: monospace;
+}
+
+.table, .column2, .display{
     border: 1px solid gray;
 }
 
 td{
-    font-family: monospace;
     border-bottom: 1px solid gray;
 }
 

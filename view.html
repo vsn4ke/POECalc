@@ -13,43 +13,45 @@
 </head>
 <body>
   <div class="wrapper">
-    <div id="calculator">
+    <div class="calculator">
       <div class="column1">
-        <div class="displayOutput">
-        
+        <div class="display">
+          <p data-value1="0" data-value2="0" data-action="add" data-last-action="add">0</p>
         </div>
-        <div class="firstLine">
-            <button type="button" name="C">C</button> 
-            <button type="button" name="/">/</button>
-            <button type="button" name="*">*</button>
-            <button type="button" name="-">-</button>
-        </div>
-        <div class="buttonBlock">
-          <div class="numberBlock">
-            <div class="buttonLine">
-              <button type="button" name="7">7</button>
-              <button type="button" name="8">8</button>
-              <button type="button" name="9">9</button>
+        <div class="keys">
+            <div class="firstLine">
+                <button data-action="clear">C</button> 
+                <button data-action="divide">/</button>
+                <button data-action="multiply">*</button>
+                <button data-action="substract">-</button>
             </div>
-            <div class="buttonLine">
-              <button type="button" name="4">4</button>
-              <button type="button" name="5">5</button>
-              <button type="button" name="6">6</button>
+            <div class="buttonBlock">
+              <div class="numberBlock">
+                <div class="buttonLine">
+                  <button>7</button>
+                  <button>8</button>
+                  <button>9</button>
+                </div>
+                <div class="buttonLine">
+                  <button>4</button>
+                  <button>5</button>
+                  <button>6</button>
+                </div>
+                <div class="buttonLine">
+                  <button>1</button>
+                  <button>2</button>
+                  <button>3</button>
+                </div>
+                <div class="buttonLine">
+                  <button class="wide">0</button>
+                  <button data-action="decimal">.</button>
+                </div>
             </div>
-            <div class="buttonLine">
-              <button type="button" name="1">1</button>
-              <button type="button" name="2">2</button>
-              <button type="button" name="3">3</button>
+            <div class="sideButton">
+                <button data-action="add" class="tall">+</button>
+                <button data-action="equal" class="tall">=</button>
             </div>
-            <div class="buttonLine">
-              <button type="button" name="0" class="wide">0</button>
-              <button type="button" name=".">.</button>
             </div>
-          </div>
-          <div class="sideButton">
-            <button type="button" name="+" class="tall">+</button>
-            <button type="button" name="=" class="tall">=</button>
-          </div>
         </div>
       </div>
       <div class="column2">
