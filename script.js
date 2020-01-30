@@ -1,85 +1,121 @@
+/*
+    TODO : 
+    touche pour effacer la valeur actuelle chiffre par chiffre
+    integration du clavier
+    ajout de la touche 'exposant' et éventuelement 'racine de'
+
+*/
+
 const calculator = document.querySelector('.calculator')
 const keys = document.querySelector('.keys')
 let error = false
 
+function calculateResult(currentResult, lastValue, lastAction){
+    let result
+    const fCurrentResult = parseFloat(currentResult)
+    const fValue = parseFloat(lastValue)
+
+    switch (lastAction){
+        case "add":
+            result = fCurrentResult + fValue
+            break
+        case "substract":
+            result = fCurrentResult - fValue
+            break
+        case "multiply":
+            result = fCurrentResult * fValue
+            break
+        case "divide":
+            if(fValue != 0){
+                result = fCurrentResult / fValue
+            }else{
+                error = true
+                result = "Error : dividing by 0"
+            }
+            break
+    }
+    calculator.dataset.result = result
+    displayHistory(fCurrentResult, fValue, result, lastAction)
+}
+
+function displayHistory(value1, value2, result, action){
+    if(!error){
+        const history = document.querySelector('.column2')
+        let symbol
+        let p
+
+        switch (action){
+            case "add":
+                symbol = '+'
+                break
+            case "substract":
+                symbol = '-'
+                break
+            case "multiply":
+                symbol = '*'
+                break
+            case "divide":
+                symbol = '/'
+                break
+        }
+
+        p = document.createElement('p')
+        p.textContent =  value1 + ' ' + symbol + ' ' + value2 + ' = ' + result
+        history.prepend(p)
+    }
+}
+
+
 keys.addEventListener('click', e =>{
     if(e.target.matches('button')){
         const key = e.target
-        const action = key.dataset.action
+        const keyAction = key.dataset.action
         const keyValue = key.textContent
         const display = document.querySelector('.display p')
-        const displayValue = display.textContent
-        
+        const currentResult = calculator.dataset.result
+        const lastAction = calculator.dataset.lastAction
+
         if(!error){
-            if(!action){ //key pressed is a number
-                if(displayValue!="0"){
-                    display.textContent += keyValue;
+            if(!keyAction){ // number pressed
+                if(display.textContent == "0"){
+                    display.textContent = keyValue
                 }else{
-                    display.textContent = keyValue;
+                    display.textContent += keyValue
                 }
             }
-
-            if(
-                action === 'add' || 
-                action === 'substract' ||
-                action === 'multiply' ||
-                action === 'divide'
-            ){
-                display.dataset.value1 = display.textContent
-                display.dataset.action = action
-                display.dataset.lastAction = action
-                display.textContent = "0"
-            }
-
-            if(action === 'decimal'){
-                if(displayValue.indexOf(".") == "-1"){
-                    display.textContent += '.'
+    
+            if(keyAction == "decimal"){
+                if(display.textContent.indexOf(".") == "-1"){
+                    display.textContent += "."
                 }
             }
-
-            if(action === 'equal'){
-                if(display.dataset.lastAction != action){
-                    display.dataset.lastAction = "equal"
-                    display.dataset.value2 = display.textContent
+    
+            if(keyAction == "add" || keyAction == "substract" || keyAction == "multiply" || keyAction == "divide" ){
+                if(currentResult == ""){
+                    calculator.dataset.result = display.textContent
+                }else{
+                    if(lastAction != "equal"){
+                        calculateResult(currentResult, display.textContent, lastAction)
+                    }                
                 }
-                const value1 = parseFloat(display.dataset.value1)
-                const value2 = parseFloat(display.dataset.value2)
-
-                switch(display.dataset.action){
-                    case "add":
-                        display.textContent = value1 + value2
-                        break
-                    case "substract": 
-                        display.textContent = value1 - value2
-                        break
-                    case "multiply":
-                        display.textContent = value1 * value2
-                        break
-                    case "divide": 
-                        if(value2 == '0'){
-                            display.textContent = 'Error dividing by 0'
-                            error = true
-                        }else{
-                            display.textContent = value1 / value2
-                        }                    
-                        break
+                calculator.dataset.lastAction = keyAction
+                display.textContent = '0'            
+            }
+    
+            if(keyAction == "equal"){
+                if(lastAction != "" && lastAction != "equal"){ 
+                    calculateResult(calculator.dataset.result, display.textContent, lastAction)
+                    display.textContent = calculator.dataset.result
+                    calculator.dataset.lastAction = "equal"
                 }
-
-                if(!error){
-                    display.dataset.value1 = display.textContent
-
-                    // TODO add the operation to the history column
-                }            
-
             }
         }
-        if(action === 'clear'){
-            display.textContent = "0"
-            display.dataset.value1 = "0"
-            display.dataset.value2 = "0"
-            display.dataset.action = "add"
-            display.dataset.lastAction = "add"
+
+        if(keyAction == "clear"){
             error = false
+            display.textContent = "0"
+            calculator.dataset.result = ""
+            calculator.dataset.lastAction = ""
         }
     }
 })

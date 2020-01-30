@@ -58,12 +58,12 @@ button{
     height: 50px;
 }
 
-.display p {
+.display p, .column2 p {
     margin-right: 4px;
     text-align: right;
 }
 
-.display p, td, button {
+.display p, td, button, .column2 p {
     font-family: monospace;
 }
 
@@ -83,6 +83,5 @@ thead td{
     border-bottom: none;
 }
 
-.right{ 
-    text-align: right;
-}
+/* temp */ 
+.table{ display: none;}
