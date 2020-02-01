@@ -1,7 +1,6 @@
 /*
     TODO : 
     touche pour effacer la valeur actuelle chiffre par chiffre
-    ajout de la touche 'exposant' et éventuelement 'racine de'
 
 */
 
