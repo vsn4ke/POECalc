@@ -1,7 +1,6 @@
 /*
     TODO : 
     touche pour effacer la valeur actuelle chiffre par chiffre
-    integration du clavier
     ajout de la touche 'exposant' et éventuelement 'racine de'
 
 */
@@ -16,21 +15,21 @@ function calculateResult(currentResult, lastValue, lastAction){
     const fValue = parseFloat(lastValue)
 
     switch (lastAction){
-        case "add":
+        case 'add':
             result = fCurrentResult + fValue
             break
-        case "substract":
+        case 'substract':
             result = fCurrentResult - fValue
             break
-        case "multiply":
+        case 'multiply':
             result = fCurrentResult * fValue
             break
-        case "divide":
+        case 'divide':
             if(fValue != 0){
                 result = fCurrentResult / fValue
             }else{
                 error = true
-                result = "Error : dividing by 0"
+                result = 'Error : dividing by 0'
             }
             break
     }
@@ -41,25 +40,24 @@ function calculateResult(currentResult, lastValue, lastAction){
 function displayHistory(value1, value2, result, action){
     if(!error){
         const history = document.querySelector('.column2')
-        let symbol
-        let p
+        const p = document.createElement('p')
+        let symbol = ''
 
         switch (action){
-            case "add":
+            case 'add':
                 symbol = '+'
                 break
-            case "substract":
+            case 'substract':
                 symbol = '-'
                 break
-            case "multiply":
+            case 'multiply':
                 symbol = '*'
                 break
-            case "divide":
+            case 'divide':
                 symbol = '/'
                 break
         }
 
-        p = document.createElement('p')
         p.textContent =  value1 + ' ' + symbol + ' ' + value2 + ' = ' + result
         history.prepend(p)
     }
@@ -70,52 +68,100 @@ keys.addEventListener('click', e =>{
     if(e.target.matches('button')){
         const key = e.target
         const keyAction = key.dataset.action
-        const keyValue = key.textContent
         const display = document.querySelector('.display p')
         const currentResult = calculator.dataset.result
+        const currentValue = display.textContent
         const lastAction = calculator.dataset.lastAction
 
         if(!error){
-            if(!keyAction){ // number pressed
-                if(display.textContent == "0"){
-                    display.textContent = keyValue
+            if(keyAction >= 0 || keyAction <= 9){ // number pressed
+                if(currentValue == '0'){
+                    display.textContent = key.textContent
+
                 }else{
-                    display.textContent += keyValue
+                    display.textContent += key.textContent
+
                 }
             }
     
-            if(keyAction == "decimal"){
-                if(display.textContent.indexOf(".") == "-1"){
-                    display.textContent += "."
+            if(keyAction == 'decimal'){
+                if(currentValue.indexOf('.') == '-1'){
+                    display.textContent += '.'
                 }
             }
     
-            if(keyAction == "add" || keyAction == "substract" || keyAction == "multiply" || keyAction == "divide" ){
-                if(currentResult == ""){
-                    calculator.dataset.result = display.textContent
-                }else{
-                    if(lastAction != "equal"){
-                        calculateResult(currentResult, display.textContent, lastAction)
-                    }                
+            if(keyAction == 'add' || keyAction == 'substract' || keyAction == 'multiply' || keyAction == 'divide' ){
+                if(currentResult == ''){
+                    calculator.dataset.result = currentValue
+
+                }else if(lastAction != 'equal'){
+                    calculateResult(currentResult, currentValue, lastAction)
+
                 }
                 calculator.dataset.lastAction = keyAction
                 display.textContent = '0'            
             }
     
-            if(keyAction == "equal"){
-                if(lastAction != "" && lastAction != "equal"){ 
-                    calculateResult(calculator.dataset.result, display.textContent, lastAction)
-                    display.textContent = calculator.dataset.result
-                    calculator.dataset.lastAction = "equal"
+            if(keyAction == 'equal'){
+                if(lastAction != '' && lastAction != 'equal'){ 
+                    calculateResult(currentResult, currentValue, lastAction)
+                    display.textContent = currentResult
+                    calculator.dataset.lastAction = 'equal'
+
                 }
             }
         }
 
-        if(keyAction == "clear"){
+        if(keyAction == 'clear'){
             error = false
-            display.textContent = "0"
-            calculator.dataset.result = ""
-            calculator.dataset.lastAction = ""
+            display.textContent = '0'
+            calculator.dataset.result = ''
+            calculator.dataset.lastAction = ''
         }
     }
 })
+
+document.onkeypress = function(e){
+    const keyCode = e.keyCode
+    let key = ""
+
+    switch(keyCode){
+        case 13:
+            key = "equal"
+            break
+        case 42:
+            key = "multiply"
+            break
+        case 43:
+            key = "add"
+            break
+        case 46:
+            key = "decimal"
+            break
+        case 45:
+            key = "substract"
+            break
+        case 47:
+            key = "divide"
+            break
+        case 48:    //0
+        case 49:
+        case 50:
+        case 51:
+        case 52:
+        case 53:
+        case 54:
+        case 55:
+        case 56:
+        case 57:    //9     
+            key = String.fromCharCode(keyCode)
+            break
+        case 99:    //c
+            key = "clear"
+            break
+           
+    }
+    if(key != ""){
+        document.querySelector('[data-action="' + key + '"]').click()
+    }
+}
