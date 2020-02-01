@@ -32,6 +32,17 @@ function calculateResult(currentResult, lastValue, lastAction){
                 result = 'Error : dividing by 0'
             }
             break
+        case 'exponant': 
+            result = Math.pow(fCurrentResult,  fValue)
+            break
+        case 'root':
+            if(fValue != 0){
+                result = Math.pow(fCurrentResult,  1/fValue)
+            }else{
+                error = true
+                result = 'Error : dividing by 0'
+            }
+            break
     }
     calculator.dataset.result = result
     displayHistory(fCurrentResult, fValue, result, lastAction)
@@ -45,20 +56,26 @@ function displayHistory(value1, value2, result, action){
 
         switch (action){
             case 'add':
-                symbol = '+'
+                symbol = ' + '
                 break
             case 'substract':
-                symbol = '-'
+                symbol = ' - '
                 break
             case 'multiply':
-                symbol = '*'
+                symbol = ' * '
                 break
             case 'divide':
-                symbol = '/'
+                symbol = ' / '
+                break
+            case 'exponant': 
+                symbol = ' ^ '
+                break
+            case 'root':
+                symbol = ' root '
                 break
         }
 
-        p.textContent =  value1 + ' ' + symbol + ' ' + value2 + ' = ' + result
+        p.textContent =  value1  + symbol  + value2 + ' = ' + result
         history.prepend(p)
     }
 }
@@ -90,7 +107,7 @@ keys.addEventListener('click', e =>{
                 }
             }
     
-            if(keyAction == 'add' || keyAction == 'substract' || keyAction == 'multiply' || keyAction == 'divide' ){
+            if(keyAction == 'add' || keyAction == 'substract' || keyAction == 'multiply' || keyAction == 'divide' || keyAction == 'exponant' || keyAction == 'root' ){
                 if(currentResult == ''){
                     calculator.dataset.result = currentValue
 
