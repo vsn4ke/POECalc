@@ -5,7 +5,7 @@
   <meta charset="utf-8">
 
   <title>POE.ninja api implementation</title>
-  <meta name="description" content="poe ninja api implementation">
+  <meta name="description" content="calculator poe ninja api implementation">
   <meta name="author" content="vsn4ke">
 
   <link rel="stylesheet" href="css/style.css">
@@ -14,47 +14,42 @@
 <body>
   <div class="wrapper">
     <div class="calculator" data-result="" data-last-action="">
-      <div class="column1">
-        <div class="display">
-          <p>0</p>
-        </div>
-        <div class="keys">
-          <button class="key1 wide" data-action="exponant">x ^ y</button> 
-          <button class="key2 wide" data-action="root">x root y</button> 
-          <button class="key3" data-action="clear">C</button> 
-          <button class="key4" data-action="divide">/</button>
-          <button class="key5" data-action="multiply">*</button>
-          <button class="key6" data-action="substract">-</button>
-          <button class="key7" data-action="7">7</button>
-          <button class="key8" data-action="8">8</button>
-          <button class="key9" data-action="9">9</button>
-          <button class="key10" data-action="4">4</button>
-          <button class="key11" data-action="5">5</button>
-          <button class="key12" data-action="6">6</button>
-          <button class="key13" data-action="1">1</button>
-          <button class="key14" data-action="2">2</button>
-          <button class="key15" data-action="3">3</button>
-          <button class="key16 wide" data-action="0">0</button>
-          <button class="key17" data-action="decimal">.</button>
-          <button class="key18 tall" data-action="add">+</button>
-          <button class="key19 tall" data-action="equal">=</button>
-        </div>
+      <div class="display">
+        <p>0</p>
       </div>
-      <div class="column2">
-      
+      <div class="keys">
+        <button class="key1 wide" data-action="exponant">x ^ y</button> 
+        <button class="key2 wide" data-action="root">x root y</button> 
+        <button class="key3" data-action="clear">C</button> 
+        <button class="key4" data-action="divide">/</button>
+        <button class="key5" data-action="multiply">*</button>
+        <button class="key6" data-action="substract">-</button>
+        <button class="key7" data-action="7">7</button>
+        <button class="key8" data-action="8">8</button>
+        <button class="key9" data-action="9">9</button>
+        <button class="key10" data-action="4">4</button>
+        <button class="key11" data-action="5">5</button>
+        <button class="key12" data-action="6">6</button>
+        <button class="key13" data-action="1">1</button>
+        <button class="key14" data-action="2">2</button>
+        <button class="key15" data-action="3">3</button>
+        <button class="key16 wide" data-action="0">0</button>
+        <button class="key17" data-action="decimal">.</button>
+        <button class="key18 tall" data-action="add">+</button>
+        <button class="key19 tall" data-action="equal">=</button>
       </div>
     </div>
-    <div class="table">
-      <table>
-        <thead>
-          <tr>
-            <td>Currency</td>
-            <td>Value in Chaos</td>
-          </tr>
-        </thead>
+  <div class="history"></div>
+  <div class="currency">
+    <table>
+      <thead>
+        <tr>
+          <td>Currency</td>
+          <td>Value in Chaos</td>
+        </tr>
+      </thead>
 <?=$display?>
-      </table>
-    </div>
+    </table>
   </div>
   <script src="script.js"></script>
 </body>

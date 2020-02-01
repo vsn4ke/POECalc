@@ -10,22 +10,20 @@ button{
 }
 
 
-.calculator{
-    display: flex;
+.wrapper{
+    display: grid;
+    grid-template-columns: 212px 212px 312px;
+    grid-column-gap: 2px;
 }
 
-.table, .column2{
+.currency, .history{
     height: 363px;
     overflow: scroll;
     overflow-x: hidden;
 }
 
-.column1{
-    flex: 0 0 212px;
-}
-
-.column2{
-    width : 230px;
+.currency{
+    width : 300px;
 }
 
 .display{
@@ -33,18 +31,19 @@ button{
     margin-bottom: 2px;
     width: 204px;
     height: 50px;
+    overflow: hidden;
 }
 
-.display p, .column2 p {
-    margin-right: 4px;
+.display p, .history p {
     text-align: right;
+    padding-right: 2px;
 }
 
-.display p, td, button, .column2 p {
+.display p, td, button, .history p {
     font-family: monospace;
 }
 
-.table, .column2, .display{
+.currency, .history, .display{
     border: 1px solid gray;
 }
 
@@ -60,6 +59,8 @@ thead td{
     border-bottom: none;
 }
 
+
+/* calculator layout */
 .keys {
     display: grid;
     grid-template-columns: repeat(4, 50px);
@@ -95,5 +96,3 @@ thead td{
 .tall{
     height: 102px;
 }
-
-.table { display :  none}

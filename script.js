@@ -50,7 +50,7 @@ function calculateResult(currentResult, lastValue, lastAction){
 
 function displayHistory(value1, value2, result, action){
     if(!error){
-        const history = document.querySelector('.column2')
+        const history = document.querySelector('.history')
         const p = document.createElement('p')
         let symbol = ''
 
